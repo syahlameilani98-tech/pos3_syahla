@@ -26,7 +26,7 @@
                             class="form-control @error('email') is-invalid @enderror" 
                             id="exampleInputEmail1" 
                             value="{{ old('email') }}"
-                            placeholder="nama@email.com"
+                            placeholder=""
                             required
                         >
                         @error('email')
@@ -44,7 +44,7 @@
                             name="password" 
                             class="form-control @error('password') is-invalid @enderror" 
                             id="exampleInputPassword1"
-                            placeholder="••••••••"
+                            placeholder=""
                             required
                         >
                         @error('password')
