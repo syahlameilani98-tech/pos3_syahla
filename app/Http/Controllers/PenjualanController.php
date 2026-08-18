@@ -56,10 +56,7 @@ class PenjualanController extends Controller
         $search = $request->input('search');
 
         $produks = Produk::when($search, function ($query) use ($search) {
-            $query->where(function ($q) use ($search) {
-                $q->where('nama', 'like', '%' . $search . '%')
-                  ->orWhere('nama_produk', 'like', '%' . $search . '%');
-            });
+            $query->where('name', 'like', '%' . $search . '%');
         })
         ->latest()
         ->get();
@@ -128,7 +125,11 @@ class PenjualanController extends Controller
      */
     public function removeFromCart($id)
     {
-        $item = ItemPenjualan::findOrFail($id);
+        $item = ItemPenjualan::find($id);
+
+        if (!$item) {
+            return back()->with('errors', 'Item sudah tidak ada di keranjang.');
+        }
 
         DB::transaction(function () use ($item) {
             if ($item->produk) {

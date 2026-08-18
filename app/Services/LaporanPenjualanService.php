@@ -27,6 +27,7 @@ class LaporanPenjualanService
             'total_non_tunai'  => $data->total_non_tunai ?? 0,
         ];
     }
+
     public function produkTerlarisHariIni(int $limit = 5)
     {
         return DB::table('item_penjualan')
@@ -34,7 +35,7 @@ class LaporanPenjualanService
         ->join('produk', 'produk.id', '=', 'item_penjualan.produk_id')
         ->whereDate('penjualan.created_at', Carbon::today())
         ->where('penjualan.status', 'COMPLETED')
-        ->groupBY('produk.stok', 'produk.name')
+        ->groupBy('produk.stok', 'produk.name')
         ->select(
             'produk.name',
             'produk.stok',

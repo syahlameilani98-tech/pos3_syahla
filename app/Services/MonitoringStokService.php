@@ -16,8 +16,8 @@ class MonitoringStokService
 
     public function produkStokHabis(int $perPage = 5)
     {
-        return Produk::where('stok',0)
-        ->orderBy('name')
+        return Produk::where('stok', 0)
+        ->orderBy('nama')
         ->paginate($perPage, ['*'], 'stok_habis_page');
     }
 }

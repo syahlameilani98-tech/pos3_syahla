@@ -4,8 +4,6 @@
 
 @section('content')
 
-@include('layouts.navbar')
-
 <h1>Halaman Users</h1>
 <a href="{{ route('admin.users.create') }}"  class="btn btn-primary">Create</a>
 
@@ -40,20 +38,21 @@
         <td> {{$user->name}}</td>
         <td> {{$user->email}}</td>
         <td> {{$user->role->name}}</td>
-<td><a href="{{ route('admin.users.edit', $user) }}"  class="btn btn-warning">
-        Edit Akun
-    </a>
-    ||
-    <form action="{{ route('admin.users.destroy', $user) }}" method="POST" class="d-inline">
-        @csrf
-        @method('DELETE')
-    <button class="btn btn-danger" onclick="return confirm('Yakin hapus user ini?')">
-        hapus
-</button></td>
-</td>
-</form>
-</tr>
-@endforeach
+        <td>
+            <a href="{{ route('admin.users.edit', $user) }}"  class="btn btn-warning">
+                Edit Akun
+            </a>
+            ||
+            <form action="{{ route('admin.users.destroy', $user) }}" method="POST" class="d-inline">
+                @csrf
+                @method('DELETE')
+                <button class="btn btn-danger" onclick="return confirm('Yakin hapus user ini?')">
+                    hapus
+                </button>
+            </form>
+        </td>
+    </tr>
+    @endforeach
 </tbody>
 </table>
 {{ $users->links() }}

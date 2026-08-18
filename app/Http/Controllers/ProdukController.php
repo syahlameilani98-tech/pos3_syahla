@@ -39,9 +39,7 @@ class ProdukController extends Controller
         return view('produk.index', compact('products'));
     }
 
-
-
-    /**
+     /**
      * Show the form for creating a new resource.
      */
     public function create()
@@ -82,22 +80,13 @@ class ProdukController extends Controller
                                    ->store('products', 'public');
 
         }
-
-
-
         Produk::create($data);
-
-
-
         return redirect()
             ->route('produk.index')
             ->with('success', 'Product created successfully.');
     }
 
-
-
-
-    /**
+/**
      * Display the specified resource.
      */
     public function show(string $id)
@@ -105,10 +94,7 @@ class ProdukController extends Controller
         //
     }
 
-
-
-
-    /**
+     /**
      * Show the form for editing the specified resource.
      */
     public function edit(Produk $produk)
@@ -119,11 +105,7 @@ class ProdukController extends Controller
         return view('produk.edit', compact('produk'));
     }
 
-
-
-
-
-    /**
+     /**
      * Update the specified resource in storage.
      */
     public function update(UpdateRequest $request, Produk $produk)
@@ -165,18 +147,12 @@ class ProdukController extends Controller
 
         $produk->update($data);
 
-
-
         return redirect()
             ->route('produk.index')
             ->with('success', 'Product updated successfully.');
     }
 
-
-
-
-
-    /**
+ /**
      * Remove the specified resource from storage.
      */
     public function destroy(Produk $produk)
@@ -195,26 +171,14 @@ class ProdukController extends Controller
 
         }
 
-
-
-        // Hapus foto produk
+ // Hapus foto produk
         if ($produk->foto && Storage::disk('public')->exists($produk->foto)) {
-
-
             Storage::disk('public')->delete($produk->foto);
+ }
 
-
-        }
-
-
-
-
-        // Hapus data produk
+ // Hapus data produk
         $produk->delete();
-
-
-
-
+        
         return redirect()
             ->route('produk.index')
             ->with('success', 'Product deleted successfully.');
