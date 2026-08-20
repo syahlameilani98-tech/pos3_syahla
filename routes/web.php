@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ItemPenjualanController;
+use App\Http\Controllers\JenisController;
 use App\Http\Controllers\PenjualanController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\UserController;
@@ -33,7 +34,8 @@ Route::middleware('auth')->group(function () {
     // Admin dan Kasir
     Route::middleware('role:admin,kasir')->group(function () {
         Route::resource('/produk', ProdukController::class);
-        
+        Route::resource('/jenis', JenisController::class);
+
         // Route Khusus Cart / Keranjang POS
         Route::post('/penjualan/add-to-cart', [PenjualanController::class, 'addToCart'])->name('penjualan.add-to-cart');
         Route::delete('/penjualan/remove-from-cart/{id}', [PenjualanController::class, 'removeFromCart'])->name('penjualan.remove-from-cart');

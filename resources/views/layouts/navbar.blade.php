@@ -37,6 +37,13 @@
                 </li>
 
                 <li class="nav-item">
+                    <a class="nav-link {{ Request::is('jenis*') ? 'active fw-bold text-white' : '' }}"
+                       href="{{ route('jenis.index') }}">
+                        Jenis
+                    </a>
+                </li>
+
+                <li class="nav-item">
                     <a class="nav-link {{ Request::is('penjualan*') ? 'active fw-bold text-white' : '' }}"
                        href="{{ route('penjualan.index') }}">
                         Penjualan
