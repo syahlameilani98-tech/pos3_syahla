@@ -29,9 +29,17 @@ class JenisController extends Controller
     {
         $request->validate([
             "nama" => "required|string|max:255",
+            "foto" => "nullable|image|max:2048",
         ]);
 
-        Jenis::create($request->all());
+        $data = $request->only("nama");
+        $data["user_id"] = auth()->id();
+
+        if ($request->hasFile("foto")) {
+            $data["foto"] = $request->file("foto")->store("jenis", "public");
+        }
+
+        Jenis::create($data);
 
         return redirect()->route("jenis.index")->with("success", "Jenis berhasil ditambahkan.");
     }
@@ -45,9 +53,16 @@ class JenisController extends Controller
     {
         $request->validate([
             "nama" => "required|string|max:255",
+            "foto" => "nullable|image|max:2048",
         ]);
 
-        $jenis->update($request->all());
+        $data = $request->only("nama");
+
+        if ($request->hasFile("foto")) {
+            $data["foto"] = $request->file("foto")->store("jenis", "public");
+        }
+
+        $jenis->update($data);
 
         return redirect()->route("jenis.index")->with("success", "Jenis berhasil diupdate.");
     }

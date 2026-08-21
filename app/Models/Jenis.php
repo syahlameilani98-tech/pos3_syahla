@@ -19,5 +19,15 @@ class Jenis extends Model
      */
     protected $fillable = [
         'nama',
+        'foto',
+        'user_id',
     ];
+
+    /**
+     * Relasi ke user yang menambahkan jenis ini
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

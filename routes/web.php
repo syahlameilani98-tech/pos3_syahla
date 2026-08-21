@@ -34,7 +34,9 @@ Route::middleware('auth')->group(function () {
     // Admin dan Kasir
     Route::middleware('role:admin,kasir')->group(function () {
         Route::resource('/produk', ProdukController::class);
-        Route::resource('/jenis', JenisController::class);
+        Route::resource('/jenis', JenisController::class)->parameters([
+            'jenis' => 'jenis',
+        ]);
 
         // Route Khusus Cart / Keranjang POS
         Route::post('/penjualan/add-to-cart', [PenjualanController::class, 'addToCart'])->name('penjualan.add-to-cart');
